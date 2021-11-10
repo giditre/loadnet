@@ -1,0 +1,51 @@
+---
+- name: Cisco routers - OSPF single-area
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+
+  - name: Configure looback interface
+    cisco.ios.ios_config:
+      parents: "interface {{ ospf_loopback }}"
+      lines:
+      - "ip address {{ ospf_conf.router_id }} 255.255.255.255"
+      - "ip ospf cost {{ ospf_cost }}"
+
+  - name: Configure interface FE G
+    cisco.ios.ios_config:
+      parents: "interface {{ interfaceG0_name }}"
+      lines:
+      - "ip address {{ interfaceG0_conf.address }}"
+      - "ip ospf cost {{ ospf_cost }}"
+      - "ip ospf network {{ interfaceG0_conf.ospf_network_type }}"
+
+  - name: Configure interface FE G+4
+    cisco.ios.ios_config:
+      parents: "interface {{ interfaceG4_name }}"
+      lines:
+      - "ip address {{ interfaceG4_conf.address }}"
+      - "ip ospf cost {{ ospf_cost }}"
+      - "ip ospf network {{ interfaceG4_conf.ospf_network_type }}"
+
+  - name: Configure OSPF router ID
+    cisco.ios.ios_config:
+      parents: "router ospf {{ ospf_process_id }}"
+      lines:
+      - "router-id {{ ospf_conf.router_id }}"
+
+  - name: Configure OSPF router networks
+    cisco.ios.ios_config:
+      parents: "router ospf {{ ospf_process_id }}"
+      lines:
+      - "network {{ item.address }} area {{ item.area }}"
+    loop: "{{ ospf_conf.networks }}"
+
+  - name: Show running configuration
+    cisco.ios.ios_command:
+      commands: show running-config
+    register: task_output
+
+  - debug: 
+      var: task_output.stdout_lines
+
