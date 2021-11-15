@@ -1,55 +1,56 @@
-configurazione di test con X=50 e usando le porte del gruppo 1
+--- configurazione di test dello switch con G=4
 
 <HPE-5130-netlab-251>system-view
-[HPE-5130-netlab-251]interface GigabitEthernet 1/0/1
-[HPE-5130-netlab-251-GigabitEthernet1/0/1]port trunk permit vlan 51
+[HPE-5130-netlab-251]interface GigabitEthernet 1/0/4
+[HPE-5130-netlab-251-GigabitEthernet1/0/1]port link-type trunk
+[HPE-5130-netlab-251-GigabitEthernet1/0/1]port trunk permit vlan 41
+[HPE-5130-netlab-251-GigabitEthernet1/0/1]port trunk permit vlan 42
 [HPE-5130-netlab-251-GigabitEthernet1/0/1]exit
-[HPE-5130-netlab-251]interface GigabitEthernet 1/0/1
-[HPE-5130-netlab-251-GigabitEthernet1/0/1]port trunk permit vlan 52
-[HPE-5130-netlab-251-GigabitEthernet1/0/1]exit
-[HPE-5130-netlab-251]vlan 51
-[HPE-5130-netlab-251-vlan51]port GigabitEthernet 1/0/41
+[HPE-5130-netlab-251]vlan 41
+[HPE-5130-netlab-251-vlan41]port GigabitEthernet 1/0/11
 [HPE-5130-netlab-251-vlan51]exit
-[HPE-5130-netlab-251]vlan 53
-[HPE-5130-netlab-251-vlan53]port GigabitEthernet 1/0/42
-[HPE-5130-netlab-251-vlan53]port GigabitEthernet 1/0/43
-[HPE-5130-netlab-251-vlan53]exit
-[HPE-5130-netlab-251]vlan 54
-[HPE-5130-netlab-251-vlan54]port GigabitEthernet 1/0/44
-[HPE-5130-netlab-251-vlan54]port GigabitEthernet 1/0/45
-[HPE-5130-netlab-251-vlan54]exit
-[HPE-5130-netlab-251]vlan 52
-[HPE-5130-netlab-251-vlan52]port GigabitEthernet 1/0/46
-[HPE-5130-netlab-251-vlan52]end
+[HPE-5130-netlab-251]vlan 43
+[HPE-5130-netlab-251-vlan43]port GigabitEthernet 1/0/12
+[HPE-5130-netlab-251-vlan43]port GigabitEthernet 1/0/13
+[HPE-5130-netlab-251-vlan43]exit
+[HPE-5130-netlab-251]vlan 44
+[HPE-5130-netlab-251-vlan44]port GigabitEthernet 1/0/14
+[HPE-5130-netlab-251-vlan44]port GigabitEthernet 1/0/15
+[HPE-5130-netlab-251-vlan44]exit
+[HPE-5130-netlab-251]vlan 42
+[HPE-5130-netlab-251-vlan42]port GigabitEthernet 1/0/16
+[HPE-5130-netlab-251-vlan42]end
+
+--- configurazione di test dei Cisco routers con G=4
 
 1801A#conf t
 Enter configuration commands, one per line.  End with CNTL/Z.
-1801A(config)#interface Vlan 5
-1801A(config-if)#ip address 172.16.51.110 255.255.255.0
+1801A(config)#interface Vlan 8
+1801A(config-if)#ip address 172.16.41.110 255.255.255.0
 1801A(config-if)#exit
-1801A(config)#interface Vlan 1
-1801A(config-if)#ip address 10.0.251.1 255.255.255.252
+1801A(config)#interface Vlan 4
+1801A(config-if)#ip address 10.0.241.1 255.255.255.252
 1801A(config-if)#exit
 1801A(config)#exit
 1801A#show ip interf brief
 
 1801B#conf t
 Enter configuration commands, one per line.  End with CNTL/Z.
-1801B(config)#interface vlan 5
-1801B(config-if)#ip address 10.0.251.2 255.255.255.252
+1801B(config)#interface Vlan 8
+1801B(config-if)#ip address 10.0.241.2 255.255.255.252
 1801B(config-if)#exit
-1801B(config)#interface vlan 1
-1801B(config-if)#ip address 10.0.252.2 255.255.255.252
+1801B(config)#interface Vlan 4
+1801B(config-if)#ip address 10.0.242.2 255.255.255.252
 1801B(config-if)#exit
 1801B(config)#exit
 1801B#show ip interf brief
 
 1801C#conf t
 Enter configuration commands, one per line.  End with CNTL/Z.
-1801C(config)#interface Vlan 5
-1801C(config-if)#ip address 10.0.252.1 255.255.255.252
+1801C(config)#interface Vlan 8
+1801C(config-if)#ip address 10.0.242.1 255.255.255.252
 1801C(config-if)#exit
-1801C(config)#interface Vlan 1
-1801C(config-if)#ip address 172.16.52.120 255.255.255.0
+1801C(config)#interface Vlan 4
+1801C(config-if)#ip address 172.16.42.120 255.255.255.0
 1801C(config-if)#end
 1801C#show ip interf brief
