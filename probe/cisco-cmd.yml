@@ -1,0 +1,22 @@
+---
+- name: Cisco routers - current configuration
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+
+  - name: Show running configuration
+    cisco.ios.ios_command:
+      commands: show running-config
+    register: task_output
+
+  - debug: 
+      var: task_output.stdout_lines
+
+  - name: Show IP routes
+    cisco.ios.ios_command:
+      commands: show ip route
+    register: task_output
+
+  - debug: 
+      var: task_output.stdout_lines

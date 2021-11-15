@@ -1,0 +1,22 @@
+---
+routers:
+  hosts:
+
+    ciscoA:
+      ansible_host: 192.168.12.241
+
+    ciscoB:
+      ansible_host: 192.168.12.242
+
+    ciscoC:
+      ansible_host: 192.168.12.243
+
+  vars:
+    ansible_connection: ansible.netcommon.network_cli
+    ansible_network_os: cisco.ios.ios
+    ansible_user: netlab
+    ansible_password: routerlab
+    ansible_become: yes
+    ansible_become_method: enable
+    ansible_become_password: routerlab
+
