@@ -1,0 +1,89 @@
+---
+machines:
+  hosts:
+    VM-u20:
+      ansible_connection: local
+      ansible_python_interpreter: "/usr/bin/env python3"
+
+routers:
+  hosts:
+
+    ciscoA:
+      ansible_host: 192.168.12.241
+      # group-specific configuration
+      interfaceHigh_conf:
+        address: 172.16.--X+1--.110 255.255.255.0
+      interfaceLow_name: Vlan4
+      interfaceLow_conf:
+        address: 10.45.45.1 255.255.255.252
+      bgp_conf:
+        asn: 400
+        router_id: 10.250.250.4
+        neighbors:
+        - address: 10.45.45.2
+          asn: 500
+        - address: 172.16.--X+1--.10
+          asn: --X+100--
+        networks:
+        - prefix: 10.45.45.0
+          mask: 255.255.255.252
+        - prefix: 172.16.--X+1--.0
+          mask: 255.255.255.0
+
+    ciscoB:
+      ansible_host: 192.168.12.242
+      # group-specific configuration
+      interfaceHigh_name: Vlan8
+      interfaceHigh_conf:
+        address: 10.45.45.2 255.255.255.252
+      interfaceLow_name: Vlan4
+      interfaceLow_conf:
+        address: 10.56.56.2 255.255.255.252
+      bgp_conf:
+        asn: 500
+        router_id: 10.250.250.5
+        neighbors:
+        - address: 10.45.45.1
+          asn: 400
+        - address: 10.56.56.1
+          asn: 600
+        networks:
+        - prefix: 10.45.45.0
+          mask: 255.255.255.252
+        - prefix: 10.56.56.0
+          mask: 255.255.255.252
+
+    ciscoC:
+      ansible_host: 192.168.12.243
+      # group-specific configuration
+      interfaceHigh_name: Vlan8
+      interfaceHigh_conf:
+        address: 10.56.56.1 255.255.255.252
+      interfaceLow_conf:
+        address: 172.16.--X+2--.120 255.255.255.0
+      bgp_conf:
+        asn: 600
+        router_id: 10.250.250.6
+        neighbors:
+        - address: 10.56.56.2
+          asn: 500
+        - address: 172.16.--X+2--.20
+          asn: --X+200--
+        networks:
+        - prefix: 10.56.56.0
+          mask: 255.255.255.252
+        - prefix: 172.16.--X+2--.0
+          mask: 255.255.255.0
+
+  vars:
+    ansible_connection: ansible.netcommon.network_cli
+    ansible_network_os: cisco.ios.ios
+    ansible_user: netlab
+    ansible_password: routerlab
+    ansible_become: yes
+    ansible_become_method: enable
+    ansible_become_password: routerlab
+    bgp_loopback: Loopback0
+    # group-specific configuration
+    interfaceLow_name: Vlan--G--
+    interfaceHigh_name: Vlan--G+4--

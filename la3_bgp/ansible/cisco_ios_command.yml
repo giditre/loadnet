@@ -1,0 +1,81 @@
+---
+- name: Cisco routers configuration for LA3 - BGP
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+
+  - name: Stop BGP router process
+    cisco.ios.ios_config:
+      lines:
+      - "no router bgp {{ bgp_conf.asn }}"
+
+  - name: Reset looback interface
+    cisco.ios.ios_config:
+      parents: "interface {{ bgp_loopback }}"
+      lines:
+      - "no ip address"
+      - "no ip ospf cost"
+
+  - name: Reset interface FE Low (G)
+    cisco.ios.ios_config:
+      parents: "interface {{ interfaceLow_name }}"
+      lines:
+      - "no ip address"
+      - "no ip ospf cost"
+      - "no ip ospf network"
+
+  - name: Reset interface FE High (G+4)
+    cisco.ios.ios_config:
+      parents: "interface {{ interfaceHigh_name }}"
+      lines:
+      - "no ip address"
+      - "no ip ospf cost"
+      - "no ip ospf network"
+
+  - name: Configure looback interface
+    cisco.ios.ios_config:
+      parents: "interface {{ bgp_loopback }}"
+      lines:
+      - "ip address {{ bgp_conf.router_id }} 255.255.255.255"
+
+  - name: Configure interface FE Low (G)
+    cisco.ios.ios_config:
+      parents: "interface {{ interfaceLow_name }}"
+      lines:
+      - "ip address {{ interfaceLow_conf.address }}"
+
+  - name: Configure interface FE High (G+4)
+    cisco.ios.ios_config:
+      parents: "interface {{ interfaceHigh_name }}"
+      lines:
+      - "ip address {{ interfaceHigh_conf.address }}"
+
+  - name: Configure BGP router ID
+    cisco.ios.ios_config:
+      parents: "router bgp {{ bgp_conf.asn }}"
+      lines:
+      - "bgp router-id {{ bgp_conf.router_id }}"
+
+  - name: Configure BGP peering
+    cisco.ios.ios_config:
+      parents: "router bgp {{ bgp_conf.asn }}"
+      lines:
+      - "neighbor {{ item.address }} remote-as {{ item.asn }}"
+    loop: "{{ bgp_conf.neighbors }}"
+
+  - name: Configure BGP directly connected networks
+    cisco.ios.ios_config:
+      parents: "router bgp {{ bgp_conf.asn }}"
+      lines:
+      - "network {{ item.prefix }} mask {{ item.mask }}"
+    loop: "{{ bgp_conf.networks }}"
+
+  - name: Show running configuration
+    cisco.ios.ios_command:
+      commands: show running-config
+    register: task_output
+
+  - debug: 
+      var: task_output.stdout_lines
+
