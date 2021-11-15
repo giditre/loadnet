@@ -5,7 +5,7 @@ in_file_name = "inventory.yml"
 G = 4
 X = 10*G
 
-out_file_name = f"inventory_G{G}.yml"
+out_file_name = f"G{G}_inventory.yml"
 
 file_content = open(in_file_name).read()
 
