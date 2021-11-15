@@ -93,7 +93,7 @@ if [[ $ACTION =~ ^(all|del)$ ]] ; then
   # sudo docker container stop h1 h2 R1 R2 R3
   # sudo docker container rm h1 h2 R1 R2 R3
   echo "Remove all Docker containers named R* or h*"
-  NAMES=$(sudo docker container ls -f name=^[hR][0-9]+$ --format "{{.Names}}" | sort)
+  NAMES=$(sudo docker container ls -a -f name=^[hR][0-9]+$ --format "{{.Names}}" | sort)
   if [[ -n $NAMES ]] ; then
     sudo docker container stop $NAMES
     sudo docker container rm $NAMES
@@ -133,7 +133,7 @@ if [[ $ACTION =~ ^(all|add)$ ]] ; then
     echo "...but here are existing networks with intended names. Please check then run again."
     exit 1
   fi
-  NAMES=$(sudo docker container ls -f name=^[hR][0-9]$ --format "{{.Names}}" | sort)
+  NAMES=$(sudo docker container ls -a -f name=^[hR][0-9]$ --format "{{.Names}}" | sort)
   if [[ -n $NAMES ]] ; then
     echo "...but here are existing containers with intended names. Please check then run again."
     exit 1
