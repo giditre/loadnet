@@ -189,20 +189,20 @@ if [[ $ACTION =~ ^(all|add)$ ]] ; then
   done
 
   # Quagga configurations
-  FILENAMEPART="single"
+  FILENAMEPREFIX="G${G}_la2a_R${i}.conf"
   for i in 1 2 3 ; do
     echo "Configure Quagga on router R${i}"
     # set IP address to loopback interface
     sudo docker exec R${i} ip addr add $G.$G.$G.${i}/32 dev lo
     # check if conf file exists
-    FILENAME="G${G}_${FILENAMEPART}_R${i}.conf"
+    FILENAME="${FILENAMEPREFIX}_R${i}.conf"
     if [[ ! -f $FILENAME ]] ; then
       echo "WARNING: file $FILENAME not found"
       continue
     fi
     # copy conf file to router and initialize frr
     sudo docker cp $FILENAME R${i}:/etc/frr/frr.conf
-    sudo docker exec R${i} sh -x /etc/frr/init.sh
+    sudo docker exec R${i} sh -x /etc/frr/init.sh > /dev/null
   done
 
 fi

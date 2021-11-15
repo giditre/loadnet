@@ -1,9 +1,13 @@
 ---
-- name: Cisco routers - OSPF single-area
+- name: Cisco routers configuration for LA2 - OSPF
   hosts: routers
   gather_facts: false
 
   tasks:
+
+  - name: Stop OSPF router process
+    cisco.ios.ios_command:
+      commands: "no router ospf {{ ospf_process_id }}"
 
   - name: Reset looback interface
     cisco.ios.ios_config:

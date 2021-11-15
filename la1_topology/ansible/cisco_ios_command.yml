@@ -1,5 +1,5 @@
 ---
-- name: Cisco routers configuration for LA1
+- name: Cisco routers configuration for LA1 - topology
   hosts: routers
   gather_facts: false
 
