@@ -5,6 +5,22 @@
 
   tasks:
 
+  - name: Reset interface FE Low (G)
+    cisco.ios.ios_config:
+      parents: "interface {{ interfaceLow_name }}"
+      lines:
+      - "no ip address"
+      - "no ip ospf cost"
+      - "no ip ospf network"
+
+  - name: Reset interface FE High (G+4)
+    cisco.ios.ios_config:
+      parents: "interface {{ interfaceHigh_name }}"
+      lines:
+      - "no ip address"
+      - "no ip ospf cost"
+      - "no ip ospf network"
+
   - name: Configure interface FE Low (G)
     cisco.ios.ios_config:
       parents: "interface {{ interfaceLow_name }}"
@@ -21,9 +37,11 @@
       - "no ip ospf cost"
       - "no ip ospf network"
 
-  - name: Show IP configuration of interfaces
+  - name: Show running configuration and IP configuration of interfaces
     cisco.ios.ios_command:
-      commands: show ip interf brief
+      commands:
+      - "show running-config"
+      - "show ip interface brief"
     register: task_output
 
   - debug: 
