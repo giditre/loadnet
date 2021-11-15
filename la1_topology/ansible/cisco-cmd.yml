@@ -1,31 +1,26 @@
 ---
-- name: Cisco routers - OSPF single-area
+- name: Cisco routers configuration for LA1
   hosts: routers
   gather_facts: false
 
   tasks:
 
-  - name: Configure interface FE Low (G)
+  - name: Configure interfaces
     cisco.ios.ios_l3_interfaces:
       config:
       - name: "{{ interfaceLow_name }}"
         ipv4:
         - address: "{{ interfaceLow_conf.address }}"
-      state: overridden
+      - name: "{{ interfaceHigh_name }}"
+        ipv4:
+        - address: "{{ interfaceHigh_conf.address }}"
+      state: merged
 
   # - name: Configure interface FE Low (G)
   #   cisco.ios.ios_config:
   #     parents: "interface {{ interfaceLow_name }}"
   #     lines:
   #     - "ip address {{ interfaceLow_conf.address }}"
-
-  - name: Configure interface FE High (G+4)
-    cisco.ios.ios_l3_interfaces:
-      config:
-      - name: "{{ interfaceHigh_name }}"
-        ipv4:
-        - address: "{{ interfaceHigh_conf.address }}"
-      state: overridden
 
   # - name: Configure interface FE High (G+4)
   #   cisco.ios.ios_config:
