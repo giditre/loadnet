@@ -15,18 +15,13 @@
         ipv4:
         - address: "{{ interfaceHigh_conf.address }}"
       state: merged
-
-  # - name: Configure interface FE Low (G)
-  #   cisco.ios.ios_config:
-  #     parents: "interface {{ interfaceLow_name }}"
-  #     lines:
-  #     - "ip address {{ interfaceLow_conf.address }}"
-
-  # - name: Configure interface FE High (G+4)
-  #   cisco.ios.ios_config:
-  #     parents: "interface {{ interfaceHigh_name }}"
-  #     lines:
-  #     - "ip address {{ interfaceHigh_conf.address }}"
+    
+  - name: Reset OSPF configuration of interfaces
+    cisco.ios.ios_ospf_interfaces:
+      config:
+        - name: "{{ interfaceLow_name }}"
+        - name: "{{ interfaceHigh_name }}"
+      state: deleted
 
   - name: Show IP configuration of interfaces
     cisco.ios.ios_command:
