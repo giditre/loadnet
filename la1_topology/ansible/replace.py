@@ -11,7 +11,9 @@ file_content = open(in_file_name).read()
 
 # print(file_content)
 
-while ( m := re.search(r"\-\-([GX]|[+]|[0-9])+\-\-", file_content) ) is not None:
+reg_exp = r"\-\-([GX]|[+]|[0-9])+\-\-"
+
+while ( m := re.search(reg_exp, file_content) ) is not None:
   matched_string = m.group()
   result = eval(matched_string.replace("--", ""))
   file_content = file_content.replace(matched_string, str(result))
