@@ -248,7 +248,7 @@ if [[ $ACTION =~ ^(all|add)$ ]] ; then
     fi
     # copy conf file to router and initialize frr
     sudo docker cp $FILENAME R${i}:/etc/frr/frr.conf
-    sudo docker exec R${i} sh -x /etc/frr/init.sh > /dev/null
+    sudo docker exec R${i} sh -x /etc/frr/init.sh > /dev/null 2>&1
   done
 
 fi
