@@ -13,25 +13,25 @@ routers:
       ansible_host: 192.168.12.241
       # group-specific configuration
       interfaceHigh_conf:
-        address: 172.16.--X+1--.110 255.255.255.0
+        address: 172.16.41.110 255.255.255.0
       interfaceLow_conf:
-        address: 10.0.--X+201--.1 255.255.255.252
+        address: 10.0.241.1 255.255.255.252
 
     ciscoB:
       ansible_host: 192.168.12.242
       # group-specific configuration
       interfaceHigh_conf:
-        address: 10.0.--X+201--.2 255.255.255.252
+        address: 10.0.241.2 255.255.255.252
       interfaceLow_conf:
-        address: 10.0.--X+202--.2 255.255.255.252
+        address: 10.0.242.2 255.255.255.252
 
     ciscoC:
       ansible_host: 192.168.12.243
       # group-specific configuration
       interfaceHigh_conf:
-        address: 10.0.--X+202--.1 255.255.255.252
+        address: 10.0.242.1 255.255.255.252
       interfaceLow_conf:
-        address: 172.16.--X+2--.120 255.255.255.0
+        address: 172.16.42.120 255.255.255.0
 
   vars:
     ansible_connection: ansible.netcommon.network_cli
@@ -42,5 +42,5 @@ routers:
     ansible_become_method: enable
     ansible_become_password: routerlab
     # group-specific configuration
-    interfaceLow_name: Vlan--G--
-    interfaceHigh_name: Vlan--G+4--
+    interfaceLow_name: Vlan4
+    interfaceHigh_name: Vlan8
