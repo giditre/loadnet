@@ -234,7 +234,7 @@ if [[ $ACTION =~ ^(all|add)$ ]] ; then
     sudo ip link set $IFACE.$VID master br-vlan$VID
   done
 
-  # OSPF multi-area Quagga configurations
+  # Quagga configurations
   FILENAMEPART="multi"
   for i in 1 2 7 8 9 ; do
     echo "Configure Quagga on router R${i}"
