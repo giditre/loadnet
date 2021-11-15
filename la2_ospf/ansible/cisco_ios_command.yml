@@ -12,7 +12,7 @@
       - "ip address {{ ospf_conf.router_id }} 255.255.255.255"
       - "ip ospf cost {{ ospf_cost }}"
 
-  - name: Configure interface FE G
+  - name: Configure interface FE Low (G)
     cisco.ios.ios_config:
       parents: "interface {{ interfaceG0_name }}"
       lines:
@@ -20,7 +20,7 @@
       - "ip ospf cost {{ ospf_cost }}"
       - "ip ospf network {{ interfaceG0_conf.ospf_network_type }}"
 
-  - name: Configure interface FE G+4
+  - name: Configure interface FE High (G+4)
     cisco.ios.ios_config:
       parents: "interface {{ interfaceG4_name }}"
       lines:

@@ -10,59 +10,59 @@ routers:
 
     ciscoA:
       ansible_host: 192.168.12.241
-      # from here
-      interfaceG0_conf:
-        address: 10.0.241.1 255.255.255.252
-        ospf_network_type: point-to-point
-      interfaceG4_conf:
-        address: 172.16.41.110 255.255.255.0
+      # group-specific configuration
+      interfaceHigh_conf:
+        address: 172.16.--X+1--.110 255.255.255.0
         ospf_network_type: broadcast
+      interfaceLow_conf:
+        address: 10.0.--X+201--.1 255.255.255.252
+        ospf_network_type: point-to-point
       ospf_conf:
-        router_id: 4.4.4.4
+        router_id: --G--.--G--.--G--.4
         networks:
-        - address: 4.4.4.4 255.255.255.255
+        - address: --G--.--G--.--G--.4 255.255.255.255
           area: 0
-        - address: 10.0.241.0 255.255.255.252
+        - address: 10.0.--X+201--.0 255.255.255.252
           area: 0
-        - address: 172.16.41.0 255.255.255.0
+        - address: 172.16.--X+1--.0 255.255.255.0
           area: 0
 
     ciscoB:
       ansible_host: 192.168.12.242
-      # from here
-      interfaceG0_conf:
-        address: 10.0.242.2 255.255.255.252
+      # group-specific configuration
+      interfaceHigh_conf:
+        address: 10.0.--X+201--.2 255.255.255.252
         ospf_network_type: point-to-point
-      interfaceG4_conf:
-        address: 10.0.241.2 255.255.255.252
+      interfaceLow_conf:
+        address: 10.0.--X+202--.2 255.255.255.252
         ospf_network_type: point-to-point
       ospf_conf:
-        router_id: 4.4.4.5
+        router_id: --G--.--G--.--G--.5
         networks:
-        - address: 4.4.4.5 255.255.255.255
+        - address: --G--.--G--.--G--.5 255.255.255.255
           area: 0
-        - address: 10.0.241.0 255.255.255.252
+        - address: 10.0.--X+201--.0 255.255.255.252
           area: 0
-        - address: 10.0.242.0 255.255.255.252
+        - address: 10.0.--X+202--.0 255.255.255.252
           area: 0
 
     ciscoC:
       ansible_host: 192.168.12.243
-      # from here
-      interfaceG0_conf:
-        address: 172.16.42.120 255.255.255.0
-        ospf_network_type: broadcast
-      interfaceG4_conf:
-        address: 10.0.242.1 255.255.255.252
+      # group-specific configuration
+      interfaceLow_conf:
+        address: 10.0.--X+202--.1 255.255.255.252
         ospf_network_type: point-to-point
+      interfaceHigh_conf:
+        address: 172.16.--X+2--.120 255.255.255.0
+        ospf_network_type: broadcast
       ospf_conf:
-        router_id: 4.4.4.6
+        router_id: --G--.--G--.--G--.6
         networks:
-        - address: 4.4.4.6 255.255.255.255
+        - address: --G--.--G--.--G--.6 255.255.255.255
           area: 0
-        - address: 10.0.242.0 255.255.255.252
+        - address: 10.0.--X+202--.0 255.255.255.252
           area: 0
-        - address: 172.16.42.0 255.255.255.0
+        - address: 172.16.--X+2--.0 255.255.255.0
           area: 0
 
   vars:
@@ -73,9 +73,9 @@ routers:
     ansible_become: yes
     ansible_become_method: enable
     ansible_become_password: routerlab
-    # from here
-    interfaceG0_name: Vlan4
-    interfaceG4_name: Vlan8
+    # group-specific configuration
+    interfaceLow_name: Vlan--G--
+    interfaceHigh_name: Vlan--G+4--
     ospf_cost: 1
-    ospf_loopback: Loopback4
-    ospf_process_id: 40
+    ospf_loopback: Loopback--G--
+    ospf_process_id: --X--
