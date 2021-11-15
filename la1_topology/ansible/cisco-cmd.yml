@@ -1,0 +1,43 @@
+---
+- name: Cisco routers - OSPF single-area
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+
+  - name: Configure interface FE Low (G)
+    cisco.ios.ios_l3_interfaces:
+      config:
+      - name: "{{ interfaceLow_name }}"
+        ipv4:
+        - address: "{{ interfaceLow_conf.address }}"
+      state: overridden
+
+  # - name: Configure interface FE Low (G)
+  #   cisco.ios.ios_config:
+  #     parents: "interface {{ interfaceLow_name }}"
+  #     lines:
+  #     - "ip address {{ interfaceLow_conf.address }}"
+
+  - name: Configure interface FE High (G+4)
+    cisco.ios.ios_l3_interfaces:
+      config:
+      - name: "{{ interfaceHigh_name }}"
+        ipv4:
+        - address: "{{ interfaceHigh_conf.address }}"
+      state: overridden
+
+  # - name: Configure interface FE High (G+4)
+  #   cisco.ios.ios_config:
+  #     parents: "interface {{ interfaceHigh_name }}"
+  #     lines:
+  #     - "ip address {{ interfaceHigh_conf.address }}"
+
+  - name: Show IP configuration of interfaces
+    cisco.ios.ios_command:
+      commands: show ip interf brief
+    register: task_output
+
+  - debug: 
+      var: task_output.stdout_lines
+

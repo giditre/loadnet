@@ -1,0 +1,46 @@
+---
+machines:
+  hosts:
+  
+    VM-u20:
+      ansible_connection: local
+      ansible_python_interpreter: "/usr/bin/env python3"
+
+routers:
+  hosts:
+
+    ciscoA:
+      ansible_host: 192.168.12.241
+      # group-specific configuration
+      interfaceHigh_conf:
+        address: 172.16.41.110 255.255.255.0
+      interfaceLow_conf:
+        address: 10.0.241.1 255.255.255.252
+
+    ciscoB:
+      ansible_host: 192.168.12.242
+      # group-specific configuration
+      interfaceHigh_conf:
+        address: 10.0.241.2 255.255.255.252
+      interfaceLow_conf:
+        address: 10.0.242.2 255.255.255.252
+
+    ciscoC:
+      ansible_host: 192.168.12.243
+      # group-specific configuration
+      interfaceHigh_conf:
+        address: 10.0.242.1 255.255.255.252
+      interfaceLow_conf:
+        address: 172.16.42.120 255.255.255.0
+
+  vars:
+    ansible_connection: ansible.netcommon.network_cli
+    ansible_network_os: cisco.ios.ios
+    ansible_user: netlab
+    ansible_password: routerlab
+    ansible_become: yes
+    ansible_become_method: enable
+    ansible_become_password: routerlab
+    # group-specific configuration
+    interfaceLow_name: Vlan4
+    interfaceHigh_name: Vlan8
