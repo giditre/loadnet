@@ -5,6 +5,29 @@
 
   tasks:
 
+  - name: Reset looback interface
+    cisco.ios.ios_config:
+      parents: "interface {{ ospf_loopback }}"
+      lines:
+      - "no ip address"
+      - "no ip ospf cost"
+
+  - name: Reset interface FE Low (G)
+    cisco.ios.ios_config:
+      parents: "interface {{ interfaceLow_name }}"
+      lines:
+      - "no ip address"
+      - "no ip ospf cost"
+      - "no ip ospf network"
+
+  - name: Reset interface FE High (G+4)
+    cisco.ios.ios_config:
+      parents: "interface {{ interfaceHigh_name }}"
+      lines:
+      - "no ip address"
+      - "no ip ospf cost"
+      - "no ip ospf network"
+
   - name: Configure looback interface
     cisco.ios.ios_config:
       parents: "interface {{ ospf_loopback }}"
@@ -14,19 +37,19 @@
 
   - name: Configure interface FE Low (G)
     cisco.ios.ios_config:
-      parents: "interface {{ interfaceG0_name }}"
+      parents: "interface {{ interfaceLow_name }}"
       lines:
-      - "ip address {{ interfaceG0_conf.address }}"
+      - "ip address {{ interfaceLow_conf.address }}"
       - "ip ospf cost {{ ospf_cost }}"
-      - "ip ospf network {{ interfaceG0_conf.ospf_network_type }}"
+      - "ip ospf network {{ interfaceLow_conf.ospf_network_type }}"
 
   - name: Configure interface FE High (G+4)
     cisco.ios.ios_config:
-      parents: "interface {{ interfaceG4_name }}"
+      parents: "interface {{ interfaceHigh_name }}"
       lines:
-      - "ip address {{ interfaceG4_conf.address }}"
+      - "ip address {{ interfaceHigh_conf.address }}"
       - "ip ospf cost {{ ospf_cost }}"
-      - "ip ospf network {{ interfaceG4_conf.ospf_network_type }}"
+      - "ip ospf network {{ interfaceHigh_conf.ospf_network_type }}"
 
   - name: Configure OSPF router ID
     cisco.ios.ios_config:

@@ -49,10 +49,10 @@ routers:
     ciscoC:
       ansible_host: 192.168.12.243
       # group-specific configuration
-      interfaceLow_conf:
+      interfaceHigh_conf:
         address: 10.0.--X+202--.1 255.255.255.252
         ospf_network_type: point-to-point
-      interfaceHigh_conf:
+      interfaceLow_conf:
         address: 172.16.--X+2--.120 255.255.255.0
         ospf_network_type: broadcast
       ospf_conf:
