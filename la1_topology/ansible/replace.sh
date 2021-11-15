@@ -19,3 +19,4 @@ cat $INFILENAME | while read LINE; do
   fi
 done
 
+echo "WARNING: this script produces invalid YAML file, as it does not preserve indentation."
