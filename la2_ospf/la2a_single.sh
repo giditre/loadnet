@@ -189,12 +189,12 @@ if [[ $ACTION =~ ^(all|add)$ ]] ; then
   done
 
   # OSPF single-area Quagga configurations
-  FILEPREFIX="single"
+  FILENAMEPART="single"
   for i in 1 2 3 ; do
     # set IP address to loopback interface
     sudo docker exec R${i} ip addr add $G.$G.$G.${i}/32 dev lo
     # check if conf file exists
-    FILENAME=${FILEPREFIX}_R${i}.conf
+    FILENAME="G${G}_${FILENAMEPART}_R${i}.conf"
     if [[ ! -f $FILENAME ]] ; then
       echo "WARNING: file $FILENAME not found"
       continue
