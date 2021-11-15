@@ -1,4 +1,4 @@
---- configurazione di test dello switch con G=4
+--- configuration of switch "251" with G=4
 
 <HPE-5130-netlab-251>system-view
 [HPE-5130-netlab-251]interface GigabitEthernet 1/0/4
@@ -21,7 +21,7 @@
 [HPE-5130-netlab-251-vlan42]port GigabitEthernet 1/0/16
 [HPE-5130-netlab-251-vlan42]end
 
---- configurazione di test dei Cisco routers con G=4
+--- configuration of Cisco routers with G=4
 
 1801A#conf t
 Enter configuration commands, one per line.  End with CNTL/Z.
