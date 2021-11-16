@@ -127,4 +127,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-la1_topology/ansible/cisco_val.yml
