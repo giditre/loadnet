@@ -221,12 +221,14 @@ if [[ $ACTION =~ ^(all|add)$ ]] ; then
 
   # Quagga configurations
   FILENAMEPREFIX="G${G}_la3b"
+  # get absolute path of directory where the script is (assuming .conf files are there too)
+  SCRIPTDIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
   for i in 1 2 7 8 ; do
     echo "Configure Quagga on router R${i}"
     # set IP address to loopback interface
     sudo docker exec R${i} ip addr add $G.$G.$G.${i}/32 dev lo
     # check if conf file exists
-    FILENAME="${FILENAMEPREFIX}_R${i}.conf"
+    FILENAME="${SCRIPTDIR}/${FILENAMEPREFIX}_R${i}.conf"
     if [[ ! -f $FILENAME ]] ; then
       echo "WARNING: file $FILENAME not found"
       continue
