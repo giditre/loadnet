@@ -69,10 +69,8 @@ routers:
     ansible_connection: ansible.netcommon.network_cli
     ansible_network_os: cisco.ios.ios
     ansible_user: netlab
-    ansible_password: routerlab
     ansible_become: yes
     ansible_become_method: enable
-    ansible_become_password: routerlab
     # group-specific configuration
     interfaceLow_name: Vlan--G--
     interfaceHigh_name: Vlan--G+4--
