@@ -12,7 +12,7 @@ docker_arping(){
 }
 
 # default argument values
-G=5
+G=4
 IFACE=enp6s0
 ASK=true
 
