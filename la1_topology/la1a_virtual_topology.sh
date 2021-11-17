@@ -71,17 +71,19 @@ echo "The script is about to run with parameters
 G=$G
 X=$X
 IFACE=$IFACE
-ACTION=$ACTION
-"
+ACTION=$ACTION"
 
 if $ASK ; then
   # ask user if sure
-  read -p "Are you sure? [y/n] " -r R
+  read -p "Confirm? [y/n] " -r R
   if [[ ! $R =~ ^[Yy]$ ]] ; then
     echo "No changes made."
     exit 1
   fi
 fi
+
+# invoke something with sudo just to make the system request the password
+sudo ip link > /dev/null 2>&1
 
 if [[ $ACTION =~ ^(all|del)$ ]] ; then
 

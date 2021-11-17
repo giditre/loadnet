@@ -71,12 +71,11 @@ echo "The script is about to run with parameters
 G=$G
 X=$X
 IFACE=$IFACE
-ACTION=$ACTION
-"
+ACTION=$ACTION"
 
 if $ASK ; then
   # ask user if sure
-  read -p "Are you sure? [y/n] " -r R
+  read -p "Confirm? [y/n] " -r R
   if [[ ! $R =~ ^[Yy]$ ]] ; then
     echo "No changes made."
     exit 1
