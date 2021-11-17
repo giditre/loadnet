@@ -8,7 +8,7 @@ X=$((10*G))
 OUTFILENAME="inventory_G${G}.yml"
 echo -n > $OUTFILENAME
 
-REGEXP="\-\-([GX]|[+]|[0-9])+\-\-"
+REGEXP="\-\-[GX+0-9]+\-\-"
 
 cat $INFILENAME | while read LINE; do
   if echo $LINE | grep -q -E "$REGEXP" ; then
