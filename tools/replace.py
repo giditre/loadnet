@@ -49,7 +49,7 @@ if __name__ == "__main__":
     # print(input_file_path)
 
     # define the output file name based on the input file name
-    # e.g., if G=4 and input=foo.conf then output=G4_foo.conf
+    # e.g., if G=4 and input=foo/bar.conf then output=foo/G4_bar.conf
     output_file_path = input_file_path.parent.joinpath(f"G{G}_{input_file_path.name}")
     # print(output_file_path)
 
