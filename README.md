@@ -47,9 +47,10 @@ tools/replace.py -G 4 la3_bgp/la3a_R* la3_bgp/la3b_R* la3_bgp/ansible/inventory.
 ### LA3a - basic BGP
 
 ```bash
-la3_ospf/la3a_basic.sh -G 4 all
-ansible-playbook -kK -i la3_bgp/ansible/G4_inventory.yml la3_bgp/ansible/cisco_ios_command.yml
+la3_bgp/la3a_basic.sh -G 4 all
 ```
+
+<!-- ansible-playbook -kK -i la3_bgp/ansible/G4_inventory.yml la3_bgp/ansible/cisco_ios_command.yml -->
 
 ### LA3b - BGP routing policies
 
