@@ -21,10 +21,13 @@ ansible-playbook -kK -i la1_topology/ansible/G4_inventory.yml la1_topology/ansib
 
 ## LA2 - OSPF
 
+```bash
+tools/replace.py -G 4 la2_ospf/la2a_R* la2_ospf/la2b_R* la2_ospf/ansible/inventory.yml
+```
+
 ### LA2a - single-area OSPF
 
 ```bash
-tools/replace.py -G 4 la2_ospf/la2a_R* la2_ospf/ansible/inventory.yml
 la2_ospf/la2a_single.sh -G 4 all
 ansible-playbook -kK -i la2_ospf/ansible/G4_inventory.yml la2_ospf/ansible/cisco_ios_command.yml
 ```
@@ -37,10 +40,13 @@ la2_ospf/la2b_multi.sh -G 4 all
 
 ## LA3 - BGP
 
+```bash
+tools/replace.py -G 4 la3_bgp/la3a_R* la3_bgp/la3b_R* la3_bgp/ansible/inventory.yml
+```
+
 ### LA3a - basic BGP
 
 ```bash
-tools/replace.py -G 4 la3_bgp/la3a_R* la3_bgp/ansible/inventory.yml
 la3_ospf/la3a_basic.sh -G 4 all
 ansible-playbook -kK -i la3_bgp/ansible/G4_inventory.yml la3_bgp/ansible/cisco_ios_command.yml
 ```
