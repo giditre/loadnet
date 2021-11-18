@@ -40,7 +40,7 @@ la2_ospf/la2b_multi.sh -G 4 all
 ### LA3a - basic BGP
 
 ```bash
-tools/replace.py -y la3_bgp/la3a_R* la3_bgp/ansible/inventory.yml
+tools/replace.py -G 4 la3_bgp/la3a_R* la3_bgp/ansible/inventory.yml
 la3_ospf/la3a_basic.sh -G 4 all
 ansible-playbook -kK -i la3_bgp/ansible/G4_inventory.yml la3_bgp/ansible/cisco_ios_command.yml
 ```
