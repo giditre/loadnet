@@ -137,7 +137,7 @@ if [[ $ACTION =~ ^(all|add)$ ]] ; then
     echo "...but here are existing containers with intended names. Please check then run again."
     exit 1
   fi
-  if ip -o link | grep -q -E "$IFACE\.[0-9]+" ; then
+  if ip -o link | grep -q -E "$IFACE\.($((X+1))|$((X+2)))" ; then
     echo "...but here are existing sub-interfaces with intended names. Please check then run again."
     exit 1
   fi
