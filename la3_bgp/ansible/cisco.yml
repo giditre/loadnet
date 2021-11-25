@@ -5,18 +5,6 @@
 
   tasks:
 
-  - name: Stop BGP router process
-    cisco.ios.ios_config:
-      lines:
-      - "no router bgp {{ bgp_conf.asn }}"
-
-  - name: Reset looback interface
-    cisco.ios.ios_config:
-      parents: "interface {{ bgp_loopback }}"
-      lines:
-      - "no ip address"
-      - "no ip ospf cost"
-
   - name: Reset interface FE Low (G)
     cisco.ios.ios_config:
       parents: "interface {{ interfaceLow_name }}"
@@ -24,6 +12,7 @@
       - "no ip address"
       - "no ip ospf cost"
       - "no ip ospf network"
+    when: interfaceLow_name is defined
 
   - name: Reset interface FE High (G+4)
     cisco.ios.ios_config:
@@ -32,30 +21,21 @@
       - "no ip address"
       - "no ip ospf cost"
       - "no ip ospf network"
-
-  - name: Configure looback interface
-    cisco.ios.ios_config:
-      parents: "interface {{ bgp_loopback }}"
-      lines:
-      - "ip address {{ bgp_conf.router_id }} 255.255.255.255"
+    when: interfaceHigh_name is defined
 
   - name: Configure interface FE Low (G)
     cisco.ios.ios_config:
       parents: "interface {{ interfaceLow_name }}"
       lines:
       - "ip address {{ interfaceLow_conf.address }}"
+    when: interfaceLow_name is defined
 
   - name: Configure interface FE High (G+4)
     cisco.ios.ios_config:
       parents: "interface {{ interfaceHigh_name }}"
       lines:
       - "ip address {{ interfaceHigh_conf.address }}"
-
-  - name: Configure BGP router ID
-    cisco.ios.ios_config:
-      parents: "router bgp {{ bgp_conf.asn }}"
-      lines:
-      - "bgp router-id {{ bgp_conf.router_id }}"
+    when: interfaceHigh_name is defined
 
   - name: Configure BGP peering
     cisco.ios.ios_config:

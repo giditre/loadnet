@@ -11,67 +11,30 @@ routers:
     ciscoA:
       ansible_host: 192.168.12.241
       # group-specific configuration
+      interfaceHigh_name: Vlan8
       interfaceHigh_conf:
         address: 172.16.41.110 255.255.255.0
-      interfaceLow_name: Vlan4
-      interfaceLow_conf:
-        address: 10.45.45.1 255.255.255.252
       bgp_conf:
         asn: 400
-        router_id: 10.250.250.4
         neighbors:
-        - address: 10.45.45.2
-          asn: 500
         - address: 172.16.41.10
           asn: 140
         networks:
-        - prefix: 10.45.45.0
-          mask: 255.255.255.252
         - prefix: 172.16.41.0
           mask: 255.255.255.0
-
-    ciscoB:
-      ansible_host: 192.168.12.242
-      # group-specific configuration
-      interfaceHigh_name: Vlan8
-      interfaceHigh_conf:
-        address: 10.45.45.2 255.255.255.252
-      interfaceLow_name: Vlan4
-      interfaceLow_conf:
-        address: 10.56.56.2 255.255.255.252
-      bgp_conf:
-        asn: 500
-        router_id: 10.250.250.5
-        neighbors:
-        - address: 10.45.45.1
-          asn: 400
-        - address: 10.56.56.1
-          asn: 600
-        networks:
-        - prefix: 10.45.45.0
-          mask: 255.255.255.252
-        - prefix: 10.56.56.0
-          mask: 255.255.255.252
 
     ciscoC:
       ansible_host: 192.168.12.243
       # group-specific configuration
-      interfaceHigh_name: Vlan8
-      interfaceHigh_conf:
-        address: 10.56.56.1 255.255.255.252
+      interfaceLow_name: Vlan4
       interfaceLow_conf:
         address: 172.16.42.120 255.255.255.0
       bgp_conf:
         asn: 600
-        router_id: 10.250.250.6
         neighbors:
-        - address: 10.56.56.2
-          asn: 500
         - address: 172.16.42.20
           asn: 240
         networks:
-        - prefix: 10.56.56.0
-          mask: 255.255.255.252
         - prefix: 172.16.42.0
           mask: 255.255.255.0
 
@@ -81,7 +44,4 @@ routers:
     ansible_user: netlab
     ansible_become: yes
     ansible_become_method: enable
-    bgp_loopback: Loopback0
-    # group-specific configuration
-    interfaceLow_name: Vlan4
-    interfaceHigh_name: Vlan8
+    bgp_loopback: Loopback0    
