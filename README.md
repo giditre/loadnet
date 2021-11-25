@@ -29,7 +29,7 @@ tools/replace.py -G 4 la2_ospf/la2a_R* la2_ospf/la2b_R* la2_ospf/ansible/invento
 
 ```bash
 la2_ospf/la2a_single.sh -G 4 all
-ansible-playbook -kK -i la2_ospf/ansible/G4_inventory.yml la2_ospf/ansible/cisco_ios_command.yml
+ansible-playbook -kK -i la2_ospf/ansible/G4_inventory.yml la2_ospf/ansible/cisco.yml
 ```
 
 ### LA2b - multi-area OSPF
@@ -48,16 +48,15 @@ tools/replace.py -G 4 la3_bgp/la3a_R* la3_bgp/la3b_R* la3_bgp/ansible/inventory.
 
 ```bash
 la3_bgp/la3a_basic.sh -G 4 all
+ansible-playbook -kK -i la3_bgp/ansible/G4_inventory.yml la3_bgp/ansible/cisco.yml
 ```
-
-<!-- ansible-playbook -kK -i la3_bgp/ansible/G4_inventory.yml la3_bgp/ansible/cisco_ios_command.yml -->
 
 ### LA3b - BGP routing policies
 
 Coming soon...
 
 <!-- ```bash
-la3_ospf/la3b_policies.sh -G 4 all
+la3_bgp/la3b_policies.sh -G 4 all
 ``` -->
 
 ## LA4 - MPLS
