@@ -4,6 +4,15 @@ All commands specified below are to be executed in the main directory of the rep
 
 **Note**: the instructions for each lab activity (LA) are written considering each LA to be independent of the others; however, the instructions for each part may rely on those for the previous part(s) of the same LA (e.g., the instructions for LA2b needs to be performed after those for LA2a).
 
+## Preliminary configuration
+
+Run these commands for every user who wants tu use Ansible on the Ansible Management Node (i.e., the VM of the group)
+
+```bash
+pip3 install paramiko
+ansible-galaxy collection install ansible.netcommon cisco.ios
+```
+
 ## LA1 - topology
 
 ### LA1a - virtualized equipment configuration
@@ -53,11 +62,9 @@ ansible-playbook -kK -i la3_bgp/ansible/G4_inventory.yml la3_bgp/ansible/cisco.y
 
 ### LA3b - BGP routing policies
 
-Coming soon...
-
-<!-- ```bash
+```bash
 la3_bgp/la3b_policies.sh -G 4 all
-``` -->
+```
 
 ## LA4 - MPLS
 
