@@ -68,13 +68,15 @@ la3_bgp/la3b_policies.sh -G 4 all
 
 ## LA4 - MPLS
 
-### LA4a - basic MPLS
+This LA was presented as a "demo" only, so no additional material about it is available on this repo.
+
+<!-- ### LA4a - basic MPLS
 
 Coming soon...
 
 ### LA4b - MPLS traffic engineering
 
-Coming soon...
+Coming soon... -->
 
 ## LA5 - SDN
 
