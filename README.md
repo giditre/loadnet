@@ -1,6 +1,6 @@
 # Laboratory of Advanced Networking
 
-All commands specified below are to be executed in the main directory of the repository (e.g., if the repo was cloned in the home directory of the user, then the home directory of the repo will be ~/loadnet).
+All commands specified below are meant to be executed in the main directory of the repository (e.g., if the repo was cloned in the home directory of the user, then the home directory of the repo will be ~/loadnet). Adjust the value of parameter G to the appropriate value for your group (in the examples below, G is 4).
 
 **Note**: the instructions for each lab activity (LA) are written considering each LA to be independent of the others; however, the instructions for each part may rely on those for the previous part(s) of the same LA (e.g., the instructions for LA2b needs to be performed after those for LA2a).
 
