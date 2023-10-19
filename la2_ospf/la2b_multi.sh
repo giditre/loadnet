@@ -82,8 +82,8 @@ if $ASK ; then
   fi
 fi
 
-# invoke something with sudo just to make the system request the password
-sudo ip link > /dev/null 2>&1
+# update sudo access, requesting password if necessary
+sudo -v
 
 if [[ $ACTION =~ ^(all|del)$ ]] ; then
 

@@ -82,16 +82,18 @@ if $ASK ; then
   fi
 fi
 
-# invoke something with sudo just to make the system request the password
-sudo ip link > /dev/null 2>&1
+# update sudo access, requesting password if necessary
+sudo -v
 
 if [[ $ACTION =~ ^(all|del)$ ]] ; then
 
   echo "Remove virtual network topology"
 
+  echo "Remove all Docker containers named R* or h*"
+  # manual version
   # sudo docker container stop h1 h2 R1 R2 R3
   # sudo docker container rm h1 h2 R1 R2 R3
-  echo "Remove all Docker containers named R* or h*"
+  # automated version
   NAMES=$(sudo docker container ls -a -f name=^[hR][0-9]+$ --format "{{.Names}}" | sort)
   if [[ -n $NAMES ]] ; then
     sudo docker container stop $NAMES
@@ -100,8 +102,10 @@ if [[ $ACTION =~ ^(all|del)$ ]] ; then
     echo "...no such containers was found"
   fi
 
-  # net$((X+1)) net$((X+2)) net$((X+3)) net$((X+4)) vlan$((X+1)) vlan$((X+2))
   echo "Remove all Docker networks named net* or vlan*"
+  # extended version
+  # net$((X+1)) net$((X+2)) net$((X+3)) net$((X+4)) vlan$((X+1)) vlan$((X+2))
+  # automated version
   NAMES=$(sudo docker network ls -f name=^net[0-9]+$ -f name=^vlan[0-9]+$ --format "{{.Name}}" | sort)
   if [[ -n $NAMES ]] ; then
     sudo docker network rm $NAMES
