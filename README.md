@@ -66,10 +66,6 @@ ansible-playbook -kK -i la3_bgp/ansible/G4_inventory.yml la3_bgp/ansible/cisco.y
 la3_bgp/la3b_policies.sh -G 4 all
 ```
 
-## LA4 - MPLS
+## Other LAs
 
-No additional material about this LA is available on this repo.
-
-## LA5 - SDN
-
-No additional material about this LA is available on this repo.
+No additional material about the other LAs is available on this repo.
